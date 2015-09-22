@@ -29,8 +29,13 @@ RUN mkdir -p /usr/src/ruby \
 # skip installing gem documentation
 RUN echo 'gem: --no-rdoc --no-ri' >> "$HOME/.gemrc"
 
-# install things globally, for great justice
-ENV GEM_HOME /usr/local/bundle
+# add app user
+ENV HOME /app
+RUN useradd appina --create-home --home-dir /app --shell /bin/bash
+
+# bundle into a volume to avoid rebuilding
+VOLUME /bundle
+ENV GEM_HOME /bundle
 ENV PATH $GEM_HOME/bin:$PATH
 
 ENV BUNDLER_VERSION 1.10.4
