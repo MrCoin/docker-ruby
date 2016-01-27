@@ -1,8 +1,8 @@
 FROM ubuntu:14.04.2
 
 # Install dependency packages
-RUN apt-get update --fix-missing
-RUN apt-get upgrade -y
+RUN DEBIAN_FRONTEND=noninteractive apt-get update --fix-missing
+RUN DEBIAN_FRONTEND=noninteractive apt-get upgrade -y
 RUN DEBIAN_FRONTEND=noninteractive apt-get install -y curl git
 
 # Ruby
